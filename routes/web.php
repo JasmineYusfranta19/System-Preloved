@@ -10,7 +10,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', [TesterController::class, 'index']);
-
+Route::get('/send-email', [TesterController::class, 'send']);
 Route::prefix('admin')->group(function () {
 
     Route::middleware('guest')->controller(AuthController::class)->group(function () {

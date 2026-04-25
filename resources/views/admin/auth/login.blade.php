@@ -24,10 +24,7 @@
             {{ $errors->first() }}
         </div>
     @endif
-
-    <a href="{{ url('/admin/register') }}" class="d-block text-center mt-3">
-        Belum punya akun? Register
-    </a>
+    
     <a href="{{ route('register') }}" class="d-block text-center mt-3">
         Belum punya akun? Register
     </a>
