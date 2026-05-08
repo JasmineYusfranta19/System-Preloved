@@ -2,6 +2,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController\TesterController;
 use App\Http\Controllers\AdminController\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 
 // Import Seller Controllers
 use App\Http\Controllers\Seller\DashboardController as SellerDashboard;
@@ -9,9 +12,12 @@ use App\Http\Controllers\Seller\ShopController as SellerShop;
 use App\Http\Controllers\Seller\ProductController as SellerProduct;
 use App\Http\Controllers\Seller\OrderController as SellerOrder;
 
-Route::get('/', fn() => view('welcome'));
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/test', [TesterController::class, 'index']);
 Route::get('/send-email', [TesterController::class, 'send']);
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/shops/{slug}', [ShopController::class, 'show'])->name('shops.show');
 
 // ── Admin Routes (yang sudah ada, biarkan) ─────────────────────
 Route::prefix('admin')->group(function () {
