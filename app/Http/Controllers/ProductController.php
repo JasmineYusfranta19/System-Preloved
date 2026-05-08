@@ -51,6 +51,6 @@ class ProductController extends Controller
         // Increment views
         $product->increment('views');
 
-        return view('public.product-detail', compact('product'));
+        return view('public.product_detail', compact('product'));
     }
 }
