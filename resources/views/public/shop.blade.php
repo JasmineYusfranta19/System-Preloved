@@ -15,9 +15,14 @@
     {{-- Profil Toko --}}
     <div class="card p-4 mb-4">
         <div class="d-flex align-items-end gap-4 flex-wrap">
-            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--dark-blue),var(--light-blue));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:2rem;border:4px solid white;margin-top:-20px">
-                {{ strtoupper(substr($shop->name,0,1)) }}
-            </div>
+            @if($shop->logo)
+                <img src="{{ Storage::url($shop->logo) }}"
+                    style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:4px solid white;margin-top:-20px">
+            @else
+                <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--dark-blue),var(--light-blue));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:2rem;border:4px solid white;margin-top:-20px">
+                    {{ strtoupper(substr($shop->name,0,1)) }}
+                </div>
+            @endif
             <div class="flex-grow-1">
                 <h4 style="font-weight:800;color:var(--dark-blue);margin:0">{{ $shop->name }}</h4>
                 <div style="font-size:.85rem;color:#6b7280" class="mt-1">

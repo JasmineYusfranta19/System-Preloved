@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Buyer\CartController;
 use App\Http\Controllers\Buyer\CheckoutController;
+use App\Http\Controllers\Buyer\AddressController;
 
 // Import Seller Controllers
 use App\Http\Controllers\Seller\DashboardController as SellerDashboard;
@@ -47,6 +48,13 @@ Route::middleware(['auth', 'seller'])
         Route::get('/orders/{order}', [SellerOrder::class, 'show'])->name('orders.show');
         Route::post('/orders/{order}/ship', [SellerOrder::class, 'ship'])->name('orders.ship');
     });
+
+// Route Address
+Route::middleware('auth')->group(function () {
+    Route::post('/profile/address', [AddressController::class, 'store'])->name('address.store');
+    Route::put('/profile/address/{address}', [AddressController::class, 'update'])->name('address.update');
+    Route::post('/profile/address/{address}/delete', [AddressController::class, 'destroy'])->name('address.destroy');
+});
 
     // ── Buyer Routes (butuh login) ────────────────────────────────────
 Route::middleware('auth')->group(function () {

@@ -13,13 +13,17 @@
             --light-green: #E7F1A8;
             --base-white:  #FFFDF5;
         }
-        body { background: var(--base-white); font-family: 'Segoe UI', sans-serif; color: #1e2a4a; }
+        body { background: var(--base-white); font-family: 'Segoe UI', sans-serif; color: #1e2a4a; padding-top: 65px; }
 
         /* Navbar */
         .navbar-main {
             background: var(--dark-blue);
             padding: .75rem 0;
-            position: sticky; top: 0; z-index: 999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
             box-shadow: 0 2px 12px rgba(54,76,132,.2);
         }
         .navbar-brand-text { font-weight: 800; font-size: 1.3rem; color: white; text-decoration: none; }

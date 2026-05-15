@@ -7,15 +7,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        body { background: linear-gradient(135deg,#1e1b4b,#312e81,#4c1d95); min-height:100vh; display:flex; align-items:center; padding: 2rem 0; }
+        body { background:#364C84; min-height:100vh; display:flex; align-items:center; padding: 2rem 0; }
         .auth-card { border:none; border-radius:1.25rem; box-shadow:0 20px 60px rgba(0,0,0,.3); }
         .form-control, .form-select { border-radius:.65rem; border:1.5px solid #e5e7eb; padding:.65rem 1rem; font-size:.9rem; }
-        .form-control:focus, .form-select:focus { border-color:#8b5cf6; box-shadow:0 0 0 3px rgba(139,92,246,.15); }
-        .btn-register { background:linear-gradient(135deg,#8b5cf6,#ec4899); border:none; color:white; padding:.7rem; border-radius:.65rem; font-weight:700; width:100%; font-size:1rem; }
+        .form-control:focus, .form-select:focus { border-color:#364C84 ; box-shadow:0 0 0 3px rgba(54, 76, 132, 0.15); }
+        .btn-register { background:linear-gradient(135deg,#364C84 , #95B1EE ); border:none; color:white; padding:.7rem; border-radius:.65rem; font-weight:700; width:100%; font-size:1rem; }
         .btn-register:hover { opacity:.9; color:white; }
         .role-card { border:2px solid #e5e7eb; border-radius:.75rem; padding:1rem; cursor:pointer; transition:.2s; text-align:center; }
-        .role-card:hover { border-color:#8b5cf6; background:#f5f3ff; }
-        .role-card.selected { border-color:#8b5cf6; background:#f5f3ff; }
+        .role-card:hover { border-color:#364C84 ; background:#f5f3ff; }
+        .role-card.selected { border-color:#364C84 ; background:#f5f3ff; }
         .role-card input { display:none; }
         .role-emoji { font-size:2rem; }
     </style>
@@ -92,7 +92,7 @@
 
                 <p class="text-center mb-0" style="font-size:.88rem">
                     Sudah punya akun?
-                    <a href="{{ route('login') }}" style="color:#8b5cf6;font-weight:600;text-decoration:none">Masuk</a>
+                    <a href="{{ route('login') }}" style="color:#364C84 ;font-weight:600;text-decoration:none">Masuk</a>
                 </p>
             </div>
         </div>

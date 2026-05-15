@@ -15,15 +15,11 @@
             --accent-green: #E7F1A8;
             --accent-base: #FFFDF5;
         }
-
         body { background: #FFFDF5; font-family: 'Segoe UI', sans-serif; }
-
-        /* ── Sidebar ── */
         .sidebar {
             width: 250px; min-height: 100vh;
             background: var(--sidebar-bg);
             position: fixed; top: 0; left: 0; z-index: 100;
-            transition: .3s;
         }
         .sidebar-brand {
             padding: 1.5rem 1rem;
@@ -45,12 +41,9 @@
         }
         .sidebar .nav-link:hover,
         .sidebar .nav-link.active {
-            background: var(--sidebar-hover);
-            color: white;
+            background: var(--sidebar-hover); color: white;
         }
         .sidebar .nav-link i { font-size: 1rem; width: 1.2rem; text-align: center; }
-
-        /* ── Main ── */
         .main-content { margin-left: 250px; min-height: 100vh; background: #FFFDF5; }
         .topbar {
             background: white; padding: .75rem 1.5rem;
@@ -59,131 +52,34 @@
             position: sticky; top: 0; z-index: 99;
         }
         .topbar-title { font-weight: 700; font-size: 1.1rem; color: #364C84; }
-        .content-area { padding: 1.5rem; background: #FFFDF5; }
-
-        /* ── Stat Cards ── */
-        .stat-card {
-            border: none; border-radius: 1rem;
-            overflow: hidden; transition: .2s;
-        }
+        .content-area { padding: 1.5rem; }
+        .stat-card { border: none; border-radius: 1rem; overflow: hidden; transition: .2s; }
         .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(54,76,132,.15); }
-        .stat-card .card-body { padding: 1.25rem; }
-        .stat-icon {
-            width: 52px; height: 52px; border-radius: .75rem;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem;
-            background: rgba(54, 76, 132, 0.10);
-            color: #364C84;
-        }
-
-        /* ── Tables ── */
-        .table th {
-            font-size: .78rem; text-transform: uppercase;
-            letter-spacing: .05em; color: #364C84; font-weight: 600;
-        }
+        .table th { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: #364C84; font-weight: 600; }
         .table td { vertical-align: middle; font-size: .88rem; }
-        .table thead tr { background: rgba(149, 177, 238, 0.15); }
-
-        /* ── Badges ── */
+        .table thead tr { background: rgba(149,177,238,.15); }
         .badge-status { font-size: .72rem; padding: .3em .7em; border-radius: 2rem; }
-
-        /* Badge warna sesuai palette */
-        .badge-primary-custom {
-            background: #364C84; color: white;
-        }
-        .badge-success-custom {
-            background: #E7F1A8; color: #364C84;
-        }
-        .badge-info-custom {
-            background: #95B1EE; color: white;
-        }
-
-        /* ── Alert ── */
         .alert { border: none; border-radius: .75rem; }
-        .alert-success {
-            background: #E7F1A8;
-            color: #364C84;
-        }
-        .alert-danger {
-            background: #fde8e8;
-            color: #9b1c1c;
-        }
-        .alert-info {
-            background: #95B1EE;
-            color: white;
-        }
-
-        /* ── Form ── */
-        .form-control, .form-select {
-            border-radius: .6rem; border: 1.5px solid #dce6f5;
-            font-size: .9rem; background: white;
-        }
-        .form-control:focus, .form-select:focus {
-            border-color: #364C84;
-            box-shadow: 0 0 0 3px rgba(54, 76, 132, .15);
-        }
+        .alert-success { background: #E7F1A8; color: #364C84; }
+        .alert-danger { background: #fde8e8; color: #9b1c1c; }
+        .form-control, .form-select { border-radius: .6rem; border: 1.5px solid #dce6f5; font-size: .9rem; background: white; }
+        .form-control:focus, .form-select:focus { border-color: #364C84; box-shadow: 0 0 0 3px rgba(54,76,132,.15); }
         .form-label { color: #364C84; font-weight: 600; font-size: .88rem; }
-
-        /* ── Buttons ── */
         .btn { border-radius: .6rem; font-weight: 600; font-size: .88rem; }
-
-        .btn-primary {
-            background: #364C84; border-color: #364C84; color: white;
-        }
-        .btn-primary:hover {
-            background: #2a3d6e; border-color: #2a3d6e; color: white;
-        }
-
-        .btn-outline-primary {
-            border-color: #364C84; color: #364C84;
-        }
-        .btn-outline-primary:hover {
-            background: #364C84; color: white;
-        }
-
-        .btn-outline-secondary {
-            border-color: #95B1EE; color: #364C84;
-        }
-        .btn-outline-secondary:hover {
-            background: #95B1EE; border-color: #95B1EE; color: white;
-        }
-
-        .btn-success {
-            background: #E7F1A8; border-color: #E7F1A8; color: #364C84;
-        }
-        .btn-success:hover {
-            background: #d9e994; border-color: #d9e994; color: #364C84;
-        }
-
-        /* ── Cards ── */
-        .card {
-            border: none; border-radius: 1rem;
-            box-shadow: 0 1px 8px rgba(54, 76, 132, .08);
-            background: white;
-        }
-        .card-header {
-            background: white;
-            border-bottom: 1.5px solid #dce6f5;
-            font-weight: 700; color: #364C84;
-            border-radius: 1rem 1rem 0 0 !important;
-        }
-        .card-title { color: #364C84; font-weight: 700; }
-        .card-subtitle { color: #95B1EE; }
-
-        /* ── Pagination ── */
-        .page-link {
-            color: #364C84;
-            border-color: #dce6f5;
-        }
-        .page-link:hover {
-            background: #95B1EE; color: white; border-color: #95B1EE;
-        }
-        .page-item.active .page-link {
-            background: #364C84; border-color: #364C84;
-        }
-
-        /* ── Misc ── */
-        h1, h2, h3, h4, h5, h6 { color: #364C84; }
+        .btn-primary { background: #364C84; border-color: #364C84; color: white; }
+        .btn-primary:hover { background: #2a3d6e; border-color: #2a3d6e; color: white; }
+        .btn-outline-primary { border-color: #364C84; color: #364C84; }
+        .btn-outline-primary:hover { background: #364C84; color: white; }
+        .btn-outline-secondary { border-color: #95B1EE; color: #364C84; }
+        .btn-outline-secondary:hover { background: #95B1EE; border-color: #95B1EE; color: white; }
+        .btn-success { background: #E7F1A8; border-color: #E7F1A8; color: #364C84; }
+        .btn-success:hover { background: #d9e994; border-color: #d9e994; color: #364C84; }
+        .card { border: none; border-radius: 1rem; box-shadow: 0 1px 8px rgba(54,76,132,.08); background: white; }
+        .card-header { background: white; border-bottom: 1.5px solid #dce6f5; font-weight: 700; color: #364C84; border-radius: 1rem 1rem 0 0 !important; }
+        .page-link { color: #364C84; border-color: #dce6f5; }
+        .page-link:hover { background: #95B1EE; color: white; border-color: #95B1EE; }
+        .page-item.active .page-link { background: #364C84; border-color: #364C84; }
+        h1,h2,h3,h4,h5,h6 { color: #364C84; }
         a { color: #364C84; }
         a:hover { color: #95B1EE; }
         hr { border-color: #dce6f5; }
@@ -201,14 +97,23 @@
 
     {{-- Info Toko --}}
     @if(auth()->user()->shop)
-    <div class="px-3 py-3 border-bottom" style="border-color:#2a3d6e!important">
+    <div class="px-3 py-3" style="border-bottom:1px solid rgba(149,177,238,.2)">
         <div class="d-flex align-items-center gap-2">
-            <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#364C84,#95B1EE);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.9rem;">
-                {{ strtoupper(substr(auth()->user()->shop->name,0,1)) }}
-            </div>
-            <div>
-                <div style="color:white;font-size:.82rem;font-weight:600;line-height:1.2">{{ auth()->user()->shop->name }}</div>
-                <div style="color:#95B1EE;font-size:.72rem;">{{ auth()->user()->name }}</div>
+            @if(auth()->user()->shop->logo)
+                <img src="{{ Storage::url(auth()->user()->shop->logo) }}"
+                    style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0">
+            @else
+                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#95B1EE,#364C84);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.9rem;flex-shrink:0">
+                    {{ strtoupper(substr(auth()->user()->shop->name,0,1)) }}
+                </div>
+            @endif
+            <div style="overflow:hidden">
+                <div style="color:white;font-size:.82rem;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">
+                    {{ auth()->user()->shop->name }}
+                </div>
+                <div style="color:#95B1EE;font-size:.72rem">
+                    {{ auth()->user()->name }}
+                </div>
             </div>
         </div>
     </div>
@@ -257,7 +162,6 @@
     </div>
 
     <div class="content-area">
-        {{-- Flash Messages --}}
         @foreach(['success'=>'success','error'=>'danger','info'=>'info'] as $key => $type)
             @if(session($key))
                 <div class="alert alert-{{ $type }} alert-dismissible fade show mb-3" role="alert">

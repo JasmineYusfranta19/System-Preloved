@@ -7,14 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
-        body { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%); min-height: 100vh; display: flex; align-items: center; }
+        body { background: #FFFDF5 ; min-height: 100vh; display: flex; align-items: center; }
         .auth-card { border: none; border-radius: 1.25rem; box-shadow: 0 20px 60px rgba(0,0,0,.3); overflow: hidden; }
-        .auth-left { background: linear-gradient(160deg, #8b5cf6, #ec4899); padding: 3rem 2rem; color: white; }
+        .auth-left { background: linear-gradient(160deg, #364C84 , #95B1EE ); padding: 3rem 2rem; color: white; }
         .auth-left h2 { font-weight: 800; font-size: 2rem; }
         .auth-right { padding: 2.5rem; }
         .form-control { border-radius: .65rem; border: 1.5px solid #e5e7eb; padding: .65rem 1rem; }
-        .form-control:focus { border-color: #8b5cf6; box-shadow: 0 0 0 3px rgba(139,92,246,.15); }
-        .btn-login { background: linear-gradient(135deg, #8b5cf6, #ec4899); border: none; color: white; padding: .7rem; border-radius: .65rem; font-weight: 700; width: 100%; font-size: 1rem; }
+        .form-control:focus { border-color: #364C84 ; box-shadow: 0 0 0 3px rgba(139,92,246,.15); }
+        .btn-login { background: linear-gradient(135deg, #364C84 , #95B1EE ); border: none; color: white; padding: .7rem; border-radius: .65rem; font-weight: 700; width: 100%; font-size: 1rem; }
         .btn-login:hover { opacity: .9; color: white; }
         .divider { color: #9ca3af; font-size: .85rem; text-align: center; position: relative; }
         .divider::before, .divider::after { content: ''; position: absolute; top: 50%; width: 42%; height: 1px; background: #e5e7eb; }
@@ -96,7 +96,7 @@
 
                         <p class="text-center mt-3 mb-0" style="font-size:.88rem">
                             Belum punya akun?
-                            <a href="{{ route('register') }}" style="color:#8b5cf6;font-weight:600;text-decoration:none">Daftar sekarang</a>
+                            <a href="{{ route('register') }}" style="color:#364C84  ;font-weight:600;text-decoration:none">Daftar sekarang</a>
                         </p>
                     </div>
                 </div>
