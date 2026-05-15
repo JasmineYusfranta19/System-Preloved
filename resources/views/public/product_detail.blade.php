@@ -87,12 +87,10 @@
             @if($product->isAvailable())
                 @auth
                 <div class="d-flex gap-3">
-                    {{-- Tambah ke Keranjang → buka modal --}}
                     <button type="button" class="btn btn-outline-main flex-grow-1 py-2"
                         data-bs-toggle="modal" data-bs-target="#modalKeranjang">
                         <i class="bi bi-bag-plus me-2"></i>Tambah ke Keranjang
                     </button>
-                    {{-- Beli Sekarang → buka modal checkout --}}
                     <button type="button" class="btn btn-main flex-grow-1 py-2"
                         data-bs-toggle="modal" data-bs-target="#modalBeliSekarang">
                         Beli Sekarang
@@ -124,9 +122,14 @@
     {{-- Info Toko --}}
     <div class="card mt-4 p-3">
         <div class="d-flex align-items-center gap-3">
-            <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--dark-blue),var(--light-blue));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.2rem">
-                {{ strtoupper(substr($product->shop->name,0,1)) }}
-            </div>
+            @if($product->shop->logo)
+                <img src="{{ Storage::url($product->shop->logo) }}"
+                    style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0">
+            @else
+                <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--dark-blue),var(--light-blue));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.2rem;flex-shrink:0">
+                    {{ strtoupper(substr($product->shop->name,0,1)) }}
+                </div>
+            @endif
             <div class="flex-grow-1">
                 <div style="font-weight:700;color:var(--dark-blue)">{{ $product->shop->name }}</div>
                 <div style="font-size:.8rem;color:#6b7280">
@@ -170,24 +173,18 @@
 </div>
 
 @auth
-{{-- ══════════════════════════════════════════════════
-     MODAL 1: Tambah ke Keranjang
-══════════════════════════════════════════════════ --}}
+{{-- Modal 1: Tambah ke Keranjang --}}
 <div class="modal fade" id="modalKeranjang" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" style="max-width:420px">
         <div class="modal-content" style="border-radius:1rem;border:none;overflow:hidden">
             <div class="modal-body p-0">
-
-                {{-- Header gradien --}}
                 <div style="background:linear-gradient(135deg,var(--dark-blue),#4a6bb5);padding:1.25rem 1.5rem;color:white">
                     <div class="d-flex align-items-center justify-content-between">
                         <span style="font-weight:700;font-size:.95rem">🛒 Tambah ke Keranjang</span>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                 </div>
-
                 <div class="p-4">
-                    {{-- Info Produk --}}
                     <div class="d-flex align-items-center gap-3 mb-4">
                         @if($product->primaryImage)
                             <img src="{{ $product->primaryImage->image_url }}"
@@ -207,8 +204,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- Badge detail --}}
                     <div class="d-flex gap-2 flex-wrap mb-4">
                         <span style="background:#f0f4ff;border-radius:.5rem;padding:.3rem .7rem;font-size:.78rem;color:var(--dark-blue)">
                             Kondisi: <strong>{{ ['new'=>'Baru','like_new'=>'Seperti Baru','good'=>'Bagus','fair'=>'Cukup'][$product->condition] ?? '-' }}</strong>
@@ -222,12 +217,8 @@
                             Stok: <strong>{{ $product->stock }}</strong>
                         </span>
                     </div>
-
-                    {{-- Quantity --}}
                     <div class="mb-4">
-                        <label style="font-size:.85rem;font-weight:700;color:var(--dark-blue);display:block;margin-bottom:.5rem">
-                            Jumlah
-                        </label>
+                        <label style="font-size:.85rem;font-weight:700;color:var(--dark-blue);display:block;margin-bottom:.5rem">Jumlah</label>
                         <div class="d-flex align-items-center gap-3">
                             <div class="d-flex align-items-center" style="border:2px solid #dde8f8;border-radius:.6rem;overflow:hidden">
                                 <button type="button" onclick="changeQty('cart', -1)"
@@ -241,26 +232,18 @@
                             <span style="font-size:.8rem;color:#9ca3af">Maks. {{ $product->stock }}</span>
                         </div>
                     </div>
-
-                    {{-- Total --}}
                     <div style="background:linear-gradient(135deg,var(--dark-blue),#4a6bb5);border-radius:.75rem;padding:.85rem 1rem;margin-bottom:1.25rem">
                         <div class="d-flex justify-content-between align-items-center">
                             <span style="color:rgba(255,255,255,.75);font-size:.85rem">Total Harga</span>
-                            <span id="cartTotal" style="color:white;font-weight:800;font-size:1.15rem">
-                                {{ $product->formatted_price }}
-                            </span>
+                            <span id="cartTotal" style="color:white;font-weight:800;font-size:1.15rem">{{ $product->formatted_price }}</span>
                         </div>
                     </div>
-
-                    {{-- Form --}}
                     <form action="{{ url('/cart/add') }}" method="POST">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="quantity" id="cartQtyHidden" value="1">
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-outline-main flex-grow-1 py-2" data-bs-dismiss="modal">
-                                Batal
-                            </button>
+                            <button type="button" class="btn btn-outline-main flex-grow-1 py-2" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-main flex-grow-1 py-2">
                                 <i class="bi bi-bag-plus me-1"></i> Masukkan
                             </button>
@@ -272,25 +255,18 @@
     </div>
 </div>
 
-{{-- ══════════════════════════════════════════════════
-     MODAL 2: Beli Sekarang — Detail Alamat & Total
-══════════════════════════════════════════════════ --}}
+{{-- Modal 2: Beli Sekarang --}}
 <div class="modal fade" id="modalBeliSekarang" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" style="max-width:500px">
         <div class="modal-content" style="border-radius:1rem;border:none;overflow:hidden">
             <div class="modal-body p-0">
-
-                {{-- Header --}}
                 <div style="background:linear-gradient(135deg,var(--dark-blue),#4a6bb5);padding:1.25rem 1.5rem;color:white">
                     <div class="d-flex align-items-center justify-content-between">
                         <span style="font-weight:700;font-size:.95rem">⚡ Beli Sekarang</span>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                 </div>
-
                 <div class="p-4">
-
-                    {{-- Info Produk --}}
                     <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
                         @if($product->primaryImage)
                             <img src="{{ $product->primaryImage->image_url }}"
@@ -307,8 +283,6 @@
                         </div>
                         <div style="font-weight:800;color:var(--dark-blue)">{{ $product->formatted_price }}</div>
                     </div>
-
-                    {{-- Jumlah --}}
                     <div class="mb-4">
                         <label style="font-size:.85rem;font-weight:700;color:var(--dark-blue);display:block;margin-bottom:.5rem">Jumlah</label>
                         <div class="d-flex align-items-center gap-3">
@@ -324,21 +298,16 @@
                             <span style="font-size:.8rem;color:#9ca3af">Maks. {{ $product->stock }}</span>
                         </div>
                     </div>
-
-                    {{-- Pilih Alamat --}}
                     <div class="mb-4">
-                        <label style="font-size:.85rem;font-weight:700;color:var(--dark-blue);display:block;margin-bottom:.5rem">
-                            📍 Alamat Pengiriman
-                        </label>
+                        <label style="font-size:.85rem;font-weight:700;color:var(--dark-blue);display:block;margin-bottom:.5rem">📍 Alamat Pengiriman</label>
                         @php $addresses = auth()->user()->addresses; @endphp
                         @if($addresses->isEmpty())
                             <div style="background:#fff8e1;border-radius:.65rem;padding:.75rem 1rem;font-size:.82rem;color:#92400e">
                                 <i class="bi bi-exclamation-triangle me-1"></i>
-                                Belum ada alamat. <a href="{{ url('/profile/address/create') }}" style="color:var(--dark-blue);font-weight:700">Tambah dulu</a>
+                                Belum ada alamat. <a href="{{ url('/checkout') }}" style="color:var(--dark-blue);font-weight:700">Tambah di checkout</a>
                             </div>
                         @else
-                            <select id="buyAddressId" style="width:100%;border:2px solid #dde8f8;border-radius:.6rem;padding:.6rem .85rem;font-size:.88rem;color:var(--dark-blue);outline:none;background:white"
-                                onchange="updateBuyTotal()">
+                            <select id="buyAddressId" style="width:100%;border:2px solid #dde8f8;border-radius:.6rem;padding:.6rem .85rem;font-size:.88rem;color:var(--dark-blue);outline:none;background:white">
                                 @foreach($addresses as $addr)
                                 <option value="{{ $addr->id }}" {{ $addr->is_default ? 'selected' : '' }}>
                                     {{ $addr->label }} — {{ $addr->recipient_name }}, {{ $addr->city }}
@@ -347,8 +316,6 @@
                             </select>
                         @endif
                     </div>
-
-                    {{-- Rincian Harga --}}
                     <div style="background:#f0f4ff;border-radius:.75rem;padding:1rem;margin-bottom:1.25rem;font-size:.88rem">
                         <div class="d-flex justify-content-between mb-2">
                             <span style="color:#6b7280">Harga Produk</span>
@@ -366,19 +333,14 @@
                             </span>
                         </div>
                     </div>
-
-                    {{-- Form submit --}}
                     <form action="{{ url('/cart/add') }}" method="POST" id="formBeliSekarang">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <input type="hidden" name="quantity" id="buyQtyHidden" value="1">
                         <input type="hidden" name="redirect_checkout" value="1">
                         <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-outline-main flex-grow-1 py-2" data-bs-dismiss="modal">
-                                Batal
-                            </button>
-                            <button type="submit" class="btn btn-main flex-grow-1 py-2"
-                                {{ $addresses->isEmpty() ? 'disabled' : '' }}>
+                            <button type="button" class="btn btn-outline-main flex-grow-1 py-2" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-main flex-grow-1 py-2" {{ $addresses->isEmpty() ? 'disabled' : '' }}>
                                 Pesan Sekarang →
                             </button>
                         </div>
@@ -392,9 +354,9 @@
 
 @push('scripts')
 <script>
-const harga    = {{ $product->price }};
-const stokMax  = {{ $product->stock }};
-const ongkir   = 15000;
+const harga   = {{ $product->price }};
+const stokMax = {{ $product->stock }};
+const ongkir  = 15000;
 
 function changeQty(type, delta) {
     const id  = type === 'cart' ? 'cartQty' : 'buyQty';
@@ -407,8 +369,8 @@ function changeQty(type, delta) {
 }
 
 function syncQty(type) {
-    const id  = type === 'cart' ? 'cartQty' : 'buyQty';
-    let val   = parseInt(document.getElementById(id).value) || 1;
+    const id = type === 'cart' ? 'cartQty' : 'buyQty';
+    let val  = parseInt(document.getElementById(id).value) || 1;
     if (val < 1) val = 1;
     if (val > stokMax) val = stokMax;
     document.getElementById(id).value = val;
@@ -418,7 +380,6 @@ function syncQty(type) {
 function updateTotal(type, qty) {
     const subtotal = qty * harga;
     const fmt = v => 'Rp ' + v.toLocaleString('id-ID');
-
     if (type === 'cart') {
         document.getElementById('cartQtyHidden').value = qty;
         document.getElementById('cartTotal').textContent = fmt(subtotal);
