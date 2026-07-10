@@ -95,8 +95,10 @@
 
             @if($products->isEmpty())
             <div class="text-center py-5 text-muted">
-                <div style="font-size:3.5rem">🔍</div>
-                <h6 class="mt-3">Produk tidak ditemukan</h6>
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="{{ asset('images/empty_search_mascot.png') }}" class="img-fluid animate-float" style="max-height: 180px; filter: drop-shadow(0 4px 10px rgba(112,2,15,.15));" alt="Empty Search Mascot">
+                </div>
+                <h6 class="mt-3" style="color:var(--dark-blue); font-weight:700">Produk tidak ditemukan</h6>
                 <p style="font-size:.85rem">Coba kata kunci atau filter yang berbeda.</p>
                 <a href="{{ url('/products') }}" class="btn btn-main px-4">Lihat Semua Produk</a>
             </div>

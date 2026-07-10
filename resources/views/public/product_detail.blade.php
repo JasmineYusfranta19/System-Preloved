@@ -352,6 +352,8 @@
 </div>
 @endauth
 
+@endsection
+
 @push('scripts')
 <script>
 const harga   = {{ $product->price }};

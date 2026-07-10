@@ -72,10 +72,35 @@ class ProductSeeder extends Seeder
                 'views'       => rand(10, 500),
             ]);
 
-            // Dummy product images (pakai placeholder)
+            // Dummy product images (pakai Unsplash asli yang stylish)
+            $categoryImages = [
+                'Kaos' => 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop',
+                'Kemeja' => 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=600&auto=format&fit=crop',
+                'Blouse' => 'https://images.unsplash.com/photo-1548624149-f9b1859aa702?q=80&w=600&auto=format&fit=crop',
+                'Hoodie' => 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop',
+                'Sweater' => 'https://images.unsplash.com/photo-1614975058789-41316d0e2e9c?q=80&w=600&auto=format&fit=crop',
+                'Jaket' => 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop',
+                'Celana Jeans' => 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=600&auto=format&fit=crop',
+                'Rok' => 'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?q=80&w=600&auto=format&fit=crop',
+                'Celana Chino' => 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=600&auto=format&fit=crop',
+                'Celana Pendek' => 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=600&auto=format&fit=crop',
+                'Dress Casual' => 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=600&auto=format&fit=crop',
+                'Jumpsuit' => 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=600&auto=format&fit=crop',
+                'Blazer' => 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop',
+                'Cardigan' => 'https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?q=80&w=600&auto=format&fit=crop',
+                'Sneakers' => 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=600&auto=format&fit=crop',
+                'Sandal' => 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=600&auto=format&fit=crop',
+                'Tote Bag' => 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop',
+                'Tas Selempang' => 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=600&auto=format&fit=crop',
+                'Topi' => 'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?q=80&w=600&auto=format&fit=crop',
+                'Ikat Pinggang' => 'https://images.unsplash.com/photo-1624222247344-550fb8ec5519?q=80&w=600&auto=format&fit=crop',
+            ];
+
+            $imgUrl = $categoryImages[$data['category']] ?? 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600&auto=format&fit=crop';
+
             ProductImage::create([
                 'product_id' => $product->id,
-                'image_url'  => "https://placehold.co/600x800?text=" . urlencode($data['name']),
+                'image_url'  => $imgUrl,
                 'is_primary' => true,
                 'sort_order' => 1,
             ]);

@@ -2,14 +2,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController\TesterController;
 use App\Http\Controllers\AdminController\AuthController;
+use App\Http\Controllers\Buyer\AuthController as BuyerAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\Buyer\CartController;
 use App\Http\Controllers\Buyer\CheckoutController;
 use App\Http\Controllers\Buyer\AddressController;
-
-// Import Seller Controllers
+use App\Http\Controllers\Buyer\WishlistController;
 use App\Http\Controllers\Seller\DashboardController as SellerDashboard;
 use App\Http\Controllers\Seller\ShopController as SellerShop;
 use App\Http\Controllers\Seller\ProductController as SellerProduct;
@@ -22,18 +22,28 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/shops/{slug}', [ShopController::class, 'show'])->name('shops.show');
 
-// ── Admin Routes (yang sudah ada, biarkan) ─────────────────────
-Route::prefix('admin')->group(function () {
+// ── Admin Routes ─────────────────────────────────────────────
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
-        Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+        Route::get('/register', [AuthController::class, 'showRegister'])->name('register'); // admin.register
         Route::post('/register', [AuthController::class, 'register']);
-        Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+        Route::get('/login', [AuthController::class, 'showLogin'])->name('login');           // admin.login
         Route::post('/login', [AuthController::class, 'login']);
     });
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout'); // admin.logout
 });
 
-// ── Seller Routes (DI LUAR prefix admin) ──────────────────────
+// ── Buyer Auth Routes ─────────────────────────────────────────
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [BuyerAuthController::class, 'showRegister'])->name('register'); // register
+    Route::post('/register', [BuyerAuthController::class, 'register']);
+    Route::get('/login', [BuyerAuthController::class, 'showLogin'])->name('login');           // login
+    Route::post('/login', [BuyerAuthController::class, 'login']);
+});
+
+Route::post('/logout', [BuyerAuthController::class, 'logout'])->middleware('auth')->name('logout'); // logout
+
+// ── Seller Routes ─────────────────────────────────────────────
 Route::middleware(['auth', 'seller'])
     ->prefix('seller')
     ->name('seller.')
@@ -49,30 +59,29 @@ Route::middleware(['auth', 'seller'])
         Route::post('/orders/{order}/ship', [SellerOrder::class, 'ship'])->name('orders.ship');
     });
 
-// Route Address
+// ── Address Routes ────────────────────────────────────────────
 Route::middleware('auth')->group(function () {
     Route::post('/profile/address', [AddressController::class, 'store'])->name('address.store');
     Route::put('/profile/address/{address}', [AddressController::class, 'update'])->name('address.update');
     Route::post('/profile/address/{address}/delete', [AddressController::class, 'destroy'])->name('address.destroy');
 });
 
-    // ── Buyer Routes (butuh login) ────────────────────────────────────
+// ── Buyer Routes ──────────────────────────────────────────────
 Route::middleware('auth')->group(function () {
- 
-    // Keranjang
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
     Route::post('/cart/{cart}/remove', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
- 
-    // Checkout
+
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/checkout/payment/{order}', [CheckoutController::class, 'payment'])->name('orders.payment');
     Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('orders.success');
- 
-    // Riwayat Pesanan
+
     Route::get('/orders', [CheckoutController::class, 'orders'])->name('orders.index');
     Route::post('/orders/{order}/confirm', function(\App\Models\Order $order) {
         if ($order->buyer_id !== auth()->id()) abort(403);

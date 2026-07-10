@@ -14,13 +14,23 @@ class ProductController extends Controller
 
         $products = Product::where('status', 'active')
             ->with(['primaryImage', 'shop', 'category'])
-            ->when($request->search, fn($q) =>
-                $q->where('name', 'like', '%'.$request->search.'%')
-                  ->orWhere('brand', 'like', '%'.$request->search.'%')
+            
+            // FIX 1: Menggunakan filled() dan membungkus orWhere agar tidak merusak filter lain
+            ->when($request->filled('search'), fn($q) =>
+                $q->where(function($query) use ($request) {
+                    $query->where('name', 'like', '%'.$request->search.'%')
+                          ->orWhere('brand', 'like', '%'.$request->search.'%');
+                })
             )
-            ->when($request->category, fn($q) =>
-                $q->whereHas('category', fn($c) => $c->where('slug', $request->category))
+            
+            // FIX 2: Mendukung pencarian berdasarkan Slug Anak maupun Slug Induk Kategori
+            ->when($request->filled('category'), fn($q) =>
+                $q->whereHas('category', function($c) use ($request) {
+                    $c->where('slug', $request->category)
+                      ->orWhereHas('parent', fn($p) => $p->where('slug', $request->category));
+                })
             )
+            
             ->when($request->condition, fn($q) =>
                 $q->whereIn('condition', $request->condition)
             )

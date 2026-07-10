@@ -51,7 +51,7 @@
 
                     <div class="d-flex gap-3">
                         <a href="{{ route('seller.dashboard') }}" class="btn btn-outline-secondary px-4">Batal</a>
-                        <button type="submit" class="btn text-white flex-grow-1" style="background:linear-gradient(135deg,#364C84,#E7F1A8);font-weight:700">
+                        <button type="submit" class="btn text-white flex-grow-1" style="background:linear-gradient(135deg,#70020F,#FFA6B9);font-weight:700">
                             Simpan Perubahan
                         </button>
                     </div>

@@ -7,8 +7,10 @@
 
     @if($carts->isEmpty())
     <div class="text-center py-5">
-        <div style="font-size:4rem">🛒</div>
-        <h6 class="mt-3" style="color:var(--dark-blue)">Keranjang kamu kosong</h6>
+        <div class="d-flex justify-content-center mb-3">
+            <img src="{{ asset('images/empty_cart_mascot.png') }}" class="img-fluid animate-float" style="max-height: 180px; filter: drop-shadow(0 4px 10px rgba(112,2,15,.15));" alt="Empty Cart Mascot">
+        </div>
+        <h6 class="mt-3" style="color:var(--dark-blue); font-weight:700">Keranjang kamu kosong</h6>
         <p class="text-muted" style="font-size:.88rem">Yuk mulai belanja produk preloved pilihan!</p>
         <a href="{{ url('/products') }}" class="btn btn-main px-4 mt-2">Mulai Belanja</a>
     </div>
