@@ -1,4 +1,4 @@
-<section class="bg-bg-soft relative overflow-hidden py-16 md:py-24">
+<section class="bg-bg-soft relative overflow-hidden py-8 md:py-12">
     <!-- Decorative subtle geometric background shapes -->
     <div class="absolute -top-12 -left-12 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
     <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
@@ -28,7 +28,7 @@
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-2">
                     <a href="{{ url('/products') }}" 
                        class="inline-flex items-center justify-center bg-primary text-white hover:bg-primary-dark hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 rounded-2xl px-8 py-4 font-bold text-base shadow-lg shadow-primary/20 group">
-                        <span>🛍️ Mulai Belanja</span>
+                        <span>Mulai Belanja</span>
                         <i class="bi bi-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                     <a href="{{ route('register') }}" 

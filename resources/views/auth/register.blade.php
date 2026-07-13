@@ -21,10 +21,10 @@
         body { font-family: 'Poppins', sans-serif; }
     </style>
 </head>
-<body class="min-h-screen bg-white flex">
+<body class="h-screen bg-white flex overflow-hidden">
 
     <!-- Left Panel: Fashion Photography -->
-    <div class="hidden lg:flex lg:w-[45%] relative overflow-hidden">
+    <div class="hidden lg:flex lg:w-[45%] relative overflow-hidden h-full">
         <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop"
              alt="Fashion lifestyle preloved"
              class="absolute inset-0 w-full h-full object-cover">
@@ -67,10 +67,10 @@
     </div>
 
     <!-- Right Panel: Registration Form -->
-    <div class="flex-1 flex flex-col justify-center items-center px-6 sm:px-10 py-10 overflow-y-auto bg-white">
+    <div class="flex-1 flex flex-col justify-center items-center px-6 sm:px-10 py-6 overflow-y-auto bg-white h-full">
         
         <!-- Mobile Logo -->
-        <div class="lg:hidden mb-6 text-center w-full">
+        <div class="lg:hidden mb-4 text-center w-full">
             <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-primary-dark font-extrabold text-xl">
                 <span class="bg-primary/10 p-2 rounded-xl">
                     <i class="bi bi-bag-heart text-primary leading-none"></i>
@@ -79,122 +79,122 @@
             </a>
         </div>
         
-        <div class="w-full max-w-md">
+        <div class="w-full max-w-md my-auto">
             <!-- Form Header -->
-            <div class="mb-7">
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+            <div class="mb-4">
+                <h1 class="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-tight">
                     Buat Akun Baru
                 </h1>
-                <p class="text-sm text-gray-500 mt-2 font-medium">
+                <p class="text-xs text-gray-500 mt-1 font-medium">
                     Bergabung dengan ribuan pengguna Preloved.id — gratis!
                 </p>
             </div>
 
             <!-- Error Alert -->
             @if($errors->any())
-                <div class="mb-5 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-3 rounded-xl flex items-start gap-2.5">
+                <div class="mb-3 bg-red-50 border border-red-200 text-red-700 text-xs font-medium px-4 py-2.5 rounded-xl flex items-start gap-2.5">
                     <i class="bi bi-exclamation-circle-fill text-red-500 mt-0.5 flex-shrink-0"></i>
                     <span>{{ $errors->first() }}</span>
                 </div>
             @endif
 
-            <form action="{{ route('register') }}" method="POST" class="space-y-4">
+            <form action="{{ route('register') }}" method="POST" class="space-y-3">
                 @csrf
 
                 <!-- Role Selection -->
-                <div class="space-y-2">
-                    <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider">
+                <div class="space-y-1">
+                    <label class="block text-[10px] font-bold text-gray-700 uppercase tracking-wider">
                         Saya ingin
                     </label>
                     <div class="grid grid-cols-2 gap-3">
                         <!-- Buyer Option -->
                         <label id="label-buyer" 
-                               class="role-option flex flex-col items-center gap-2 p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 {{ old('role', 'buyer') === 'buyer' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50 hover:border-primary/30 hover:bg-primary/3' }}">
+                               class="role-option flex items-center gap-3 p-2.5 rounded-xl border-2 cursor-pointer transition-all duration-200 {{ old('role', 'buyer') === 'buyer' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50 hover:border-primary/30 hover:bg-primary/3' }}">
                             <input type="radio" name="role" value="buyer" class="sr-only" {{ old('role', 'buyer') === 'buyer' ? 'checked' : '' }}>
-                            <div class="w-10 h-10 rounded-xl flex items-center justify-center {{ old('role', 'buyer') === 'buyer' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }} transition-all">
-                                <i class="bi bi-bag text-lg"></i>
+                            <div class="role-icon-container w-8 h-8 rounded-lg flex items-center justify-center shrink-0 {{ old('role', 'buyer') === 'buyer' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }} transition-all">
+                                <i class="bi bi-bag text-sm"></i>
                             </div>
-                            <div class="text-center">
-                                <span class="block text-sm font-bold text-gray-800">Belanja</span>
-                                <span class="block text-[10px] text-gray-500 mt-0.5">Cari & beli produk</span>
+                            <div class="text-left">
+                                <span class="block text-xs font-bold text-gray-800">Belanja</span>
+                                <span class="block text-[9px] text-gray-500">Cari & beli produk</span>
                             </div>
                         </label>
                         
                         <!-- Seller Option -->
                         <label id="label-seller" 
-                               class="role-option flex flex-col items-center gap-2 p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 {{ old('role') === 'seller' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50 hover:border-primary/30 hover:bg-primary/3' }}">
+                               class="role-option flex items-center gap-3 p-2.5 rounded-xl border-2 cursor-pointer transition-all duration-200 {{ old('role') === 'seller' ? 'border-primary bg-primary/5' : 'border-gray-100 bg-gray-50 hover:border-primary/30 hover:bg-primary/3' }}">
                             <input type="radio" name="role" value="seller" class="sr-only" {{ old('role') === 'seller' ? 'checked' : '' }}>
-                            <div class="w-10 h-10 rounded-xl flex items-center justify-center {{ old('role') === 'seller' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }} transition-all">
-                                <i class="bi bi-shop text-lg"></i>
+                            <div class="role-icon-container w-8 h-8 rounded-lg flex items-center justify-center shrink-0 {{ old('role') === 'seller' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-500' }} transition-all">
+                                <i class="bi bi-shop text-sm"></i>
                             </div>
-                            <div class="text-center">
-                                <span class="block text-sm font-bold text-gray-800">Berjualan</span>
-                                <span class="block text-[10px] text-gray-500 mt-0.5">Jual pakaian preloved</span>
+                            <div class="text-left">
+                                <span class="block text-xs font-bold text-gray-800">Berjualan</span>
+                                <span class="block text-[9px] text-gray-500">Jual pakaian preloved</span>
                             </div>
                         </label>
                     </div>
                 </div>
 
                 <!-- Name -->
-                <div class="space-y-1.5">
-                    <label for="name" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Nama Lengkap</label>
+                <div class="space-y-1">
+                    <label for="name" class="block text-[10px] font-bold text-gray-700 uppercase tracking-wider">Nama Lengkap</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <i class="bi bi-person text-gray-400 text-sm"></i>
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <i class="bi bi-person text-gray-400 text-xs"></i>
                         </div>
                         <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Nama lengkap Anda" required
-                               class="w-full pl-11 pr-4 py-3 text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400 @error('name') border-red-300 @enderror">
+                               class="w-full pl-9 pr-3.5 py-2 text-xs text-gray-800 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400 @error('name') border-red-300 @enderror">
                     </div>
                 </div>
 
                 <!-- Email -->
-                <div class="space-y-1.5">
-                    <label for="email" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Email</label>
+                <div class="space-y-1">
+                    <label for="email" class="block text-[10px] font-bold text-gray-700 uppercase tracking-wider">Email</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <i class="bi bi-envelope text-gray-400 text-sm"></i>
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <i class="bi bi-envelope text-gray-400 text-xs"></i>
                         </div>
                         <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="email@kamu.com" required
-                               class="w-full pl-11 pr-4 py-3 text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400 @error('email') border-red-300 @enderror">
+                               class="w-full pl-9 pr-3.5 py-2 text-xs text-gray-800 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400 @error('email') border-red-300 @enderror">
                     </div>
                 </div>
 
                 <!-- Phone -->
-                <div class="space-y-1.5">
-                    <label for="phone" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">No. WhatsApp</label>
+                <div class="space-y-1">
+                    <label for="phone" class="block text-[10px] font-bold text-gray-700 uppercase tracking-wider">No. WhatsApp</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <i class="bi bi-telephone text-gray-400 text-sm"></i>
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <i class="bi bi-telephone text-gray-400 text-xs"></i>
                         </div>
                         <input type="text" id="phone" name="phone" value="{{ old('phone') }}" placeholder="08xxxxxxxxxx" required
-                               class="w-full pl-11 pr-4 py-3 text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400">
+                               class="w-full pl-9 pr-3.5 py-2 text-xs text-gray-800 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400">
                     </div>
                 </div>
 
                 <!-- Password Row -->
                 <div class="grid grid-cols-2 gap-3">
-                    <div class="space-y-1.5">
-                        <label for="password" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Password</label>
+                    <div class="space-y-1">
+                        <label for="password" class="block text-[10px] font-bold text-gray-700 uppercase tracking-wider">Password</label>
                         <input type="password" id="password" name="password" placeholder="Min. 8 karakter" required
-                               class="w-full px-4 py-3 text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400">
+                               class="w-full px-3.5 py-2 text-xs text-gray-800 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400">
                     </div>
-                    <div class="space-y-1.5">
-                        <label for="password_confirmation" class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Konfirmasi</label>
+                    <div class="space-y-1">
+                        <label for="password_confirmation" class="block text-[10px] font-bold text-gray-700 uppercase tracking-wider">Konfirmasi</label>
                         <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Ulangi password" required
-                               class="w-full px-4 py-3 text-sm text-gray-800 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400">
+                               class="w-full px-3.5 py-2 text-xs text-gray-800 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 focus:bg-white transition-all placeholder-gray-400">
                     </div>
                 </div>
 
                 <!-- Submit Button -->
                 <button type="submit" 
-                        class="w-full bg-primary text-white font-bold py-4 px-6 rounded-2xl hover:bg-primary-dark active:scale-[0.98] transition-all duration-200 text-sm tracking-wide shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mt-1">
+                        class="w-full bg-primary text-white font-bold py-3 px-5 rounded-xl hover:bg-primary-dark active:scale-[0.98] transition-all duration-200 text-xs tracking-wide shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mt-1">
                     Buat Akun Sekarang
-                    <i class="bi bi-arrow-right text-base"></i>
+                    <i class="bi bi-arrow-right text-sm"></i>
                 </button>
             </form>
 
             <!-- Login Link -->
-            <p class="text-center text-sm text-gray-600 mt-5">
+            <p class="text-center text-xs text-gray-600 mt-4">
                 Sudah punya akun?
                 <a href="{{ route('login') }}" class="text-primary hover:text-primary-dark font-bold transition-colors ml-1">
                     Masuk di sini
@@ -202,8 +202,8 @@
             </p>
 
             <!-- Back to Home -->
-            <div class="text-center mt-5">
-                <a href="{{ url('/') }}" class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 transition-colors">
+            <div class="text-center mt-4">
+                <a href="{{ url('/') }}" class="inline-flex items-center gap-1.5 text-[11px] text-gray-400 hover:text-gray-600 transition-colors">
                     <i class="bi bi-arrow-left text-xs"></i>
                     Kembali ke Beranda
                 </a>
@@ -216,13 +216,13 @@
     radioInputs.forEach(radio => {
         radio.addEventListener('change', () => {
             document.querySelectorAll('.role-option').forEach(opt => {
-                const icon = opt.querySelector('.w-10');
+                const icon = opt.querySelector('.role-icon-container');
                 opt.classList.remove('border-primary', 'bg-primary/5');
                 opt.classList.add('border-gray-100', 'bg-gray-50');
                 if (icon) { icon.classList.remove('bg-primary', 'text-white'); icon.classList.add('bg-gray-200', 'text-gray-500'); }
             });
             const selected = radio.closest('.role-option');
-            const selectedIcon = selected.querySelector('.w-10');
+            const selectedIcon = selected.querySelector('.role-icon-container');
             selected.classList.remove('border-gray-100', 'bg-gray-50');
             selected.classList.add('border-primary', 'bg-primary/5');
             if (selectedIcon) { selectedIcon.classList.remove('bg-gray-200', 'text-gray-500'); selectedIcon.classList.add('bg-primary', 'text-white'); }

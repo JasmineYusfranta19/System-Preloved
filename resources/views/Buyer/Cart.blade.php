@@ -58,11 +58,11 @@
                         <div class="d-flex flex-column align-items-end gap-2">
                             <form action="{{ url('/cart/'.$cart->id) }}" method="POST" class="d-flex align-items-center gap-1">
                                 @csrf @method('PUT')
-                                <button type="button" onclick="changeQty(this,-1)" class="btn btn-sm" style="background:#f0f4ff;color:var(--dark-blue);width:28px;height:28px;padding:0">−</button>
+                                <button type="button" onclick="changeQty(this,-1)" class="btn btn-sm" style="background:var(--light-blue);color:var(--dark-blue);width:28px;height:28px;padding:0">−</button>
                                 <input type="number" name="quantity" value="{{ $cart->quantity }}" min="1" max="{{ $cart->product->stock }}"
-                                    style="width:40px;text-align:center;border:1.5px solid #dde8f8;border-radius:.4rem;font-size:.85rem;padding:.1rem"
+                                    style="width:40px;text-align:center;border:1.5px solid var(--light-blue);border-radius:.4rem;font-size:.85rem;padding:.1rem"
                                     onchange="this.form.submit()">
-                                <button type="button" onclick="changeQty(this,1)" class="btn btn-sm" style="background:#f0f4ff;color:var(--dark-blue);width:28px;height:28px;padding:0">+</button>
+                                <button type="button" onclick="changeQty(this,1)" class="btn btn-sm" style="background:var(--light-blue);color:var(--dark-blue);width:28px;height:28px;padding:0">+</button>
                             </form>
                             <div style="font-weight:700;color:var(--dark-blue);font-size:.95rem">
                                 Rp {{ number_format($cart->product->price * $cart->quantity, 0, ',', '.') }}

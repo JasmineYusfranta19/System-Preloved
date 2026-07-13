@@ -16,7 +16,7 @@
                 </select>
             </div>
             <div class="col-auto d-flex gap-2">
-                <button type="submit" class="btn" style="background:#70020F;color:white">Filter</button>
+                <button type="submit" class="btn" style="background:var(--primary);color:white">Filter</button>
                 <a href="{{ route('seller.orders.index') }}" class="btn btn-outline-secondary">Reset</a>
             </div>
         </form>
@@ -69,7 +69,7 @@
                                 <div class="text-muted">+{{ $order->items->count()-2 }} lainnya</div>
                             @endif
                         </td>
-                        <td class="fw-700" style="color:#70020F;font-size:.88rem">{{ $order->formatted_total }}</td>
+                        <td class="fw-700" style="color:var(--sidebar-bg);font-size:.88rem">{{ $order->formatted_total }}</td>
                         <td>
                             @if($order->payment)
                             <span class="badge bg-{{ $order->payment->isPaid()?'success':'warning' }} badge-status">
@@ -85,7 +85,7 @@
                             </span>
                         </td>
                         <td class="pe-4">
-                            <a href="{{ route('seller.orders.show', $order) }}" class="btn btn-sm text-white" style="background:#70020F;font-size:.78rem">
+                            <a href="{{ route('seller.orders.show', $order) }}" class="btn btn-sm text-white" style="background:var(--primary);font-size:.78rem">
                                 <i class="bi bi-eye"></i> Detail
                             </a>
                         </td>

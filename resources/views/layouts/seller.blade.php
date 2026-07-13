@@ -8,14 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         :root {
-            --sidebar-bg: #70020F;
-            --sidebar-hover: #54010B;
-            --accent-blue: #FFDEE2;
-            --accent-dark: #70020F;
-            --accent-green: #FFA6B9;
-            --accent-base: #FFF5F6;
+            --sidebar-bg: #8C2438;      /* Primary Dark */
+            --sidebar-hover: #701c2c;   /* Darker Red */
+            --accent-blue: #FCE8EA;     /* Soft Pink / Bg Soft */
+            --accent-dark: #8C2438;
+            --accent-green: #E85D75;    /* Accent */
+            --accent-base: #FFF8F9;
+            --primary: #B8324A;         /* Solid Primary */
         }
-        body { background: #FFF5F6; font-family: 'Segoe UI', sans-serif; }
+        body { background: #FFF8F9; font-family: 'Segoe UI', sans-serif; }
         .sidebar {
             width: 250px; 
             min-height: 100vh;
@@ -27,7 +28,7 @@
         }
         .sidebar-brand {
             padding: 1.5rem 1rem;
-            background: linear-gradient(135deg, #70020F, #FFA6B9);
+            background: linear-gradient(135deg, var(--sidebar-bg), var(--accent-green));
             font-size: 1.2rem; font-weight: 800; color: white;
             display: flex; align-items: center; gap: .5rem;
         }
@@ -48,51 +49,51 @@
             background: var(--sidebar-hover); color: white;
         }
         .sidebar .nav-link i { font-size: 1rem; width: 1.2rem; text-align: center; }
-        .main-content { margin-left: 250px; min-height: 100vh; background: #FFF5F6; }
+        .main-content { margin-left: 250px; min-height: 100vh; background: #FFF8F9; }
         .topbar {
             background: white; 
             padding: .75rem 1.5rem;
-            border-bottom: 1px solid #ffdcd2;
+            border-bottom: 1px solid var(--accent-blue);
             display: flex; 
             align-items: center; 
             justify-content: space-between;
             position: sticky; 
             top: 0; 
             z-index: 1020;
-            box-shadow: 0 2px 8px rgba(112,2,15,.05);
+            box-shadow: 0 2px 8px rgba(140,36,56,.05);
         }
-        .topbar-title { font-weight: 700; font-size: 1.1rem; color: #70020F; }
+        .topbar-title { font-weight: 700; font-size: 1.1rem; color: var(--sidebar-bg); }
         .content-area { padding: 1.5rem; }
         .stat-card { border: none; border-radius: 1rem; overflow: hidden; transition: .2s; }
-        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(112,2,15,.15); }
-        .table th { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: #70020F; font-weight: 600; }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(140,36,56,.15); }
+        .table th { font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--sidebar-bg); font-weight: 600; }
         .table td { vertical-align: middle; font-size: .88rem; }
-        .table thead tr { background: rgba(255,222,226,.3); }
+        .table thead tr { background: rgba(252,232,234,.4); }
         .badge-status { font-size: .72rem; padding: .3em .7em; border-radius: 2rem; }
         .alert { border: none; border-radius: .75rem; }
-        .alert-success { background: #FFDEE2; color: #70020F; }
+        .alert-success { background: var(--accent-blue); color: var(--sidebar-bg); }
         .alert-danger { background: #fde8e8; color: #9b1c1c; }
-        .form-control, .form-select { border-radius: .6rem; border: 1.5px solid #ffdcd2; font-size: .9rem; background: white; }
-        .form-control:focus, .form-select:focus { border-color: #70020F; box-shadow: 0 0 0 3px rgba(112,2,15,.15); }
-        .form-label { color: #70020F; font-weight: 600; font-size: .88rem; }
+        .form-control, .form-select { border-radius: .6rem; border: 1.5px solid var(--accent-blue); font-size: .9rem; background: white; }
+        .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(184,50,74,.15); }
+        .form-label { color: var(--sidebar-bg); font-weight: 600; font-size: .88rem; }
         .btn { border-radius: .6rem; font-weight: 600; font-size: .88rem; }
-        .btn-primary { background: #70020F; border-color: #70020F; color: white; }
-        .btn-primary:hover { background: #54010B; border-color: #54010B; color: white; }
-        .btn-outline-primary { border-color: #70020F; color: #70020F; }
-        .btn-outline-primary:hover { background: #70020F; color: white; }
-        .btn-outline-secondary { border-color: #FFDEE2; color: #70020F; }
-        .btn-outline-secondary:hover { background: #FFDEE2; border-color: #FFDEE2; color: #70020F; }
-        .btn-success { background: #FFA6B9; border-color: #FFA6B9; color: #70020F; }
-        .btn-success:hover { background: #ff91a9; border-color: #ff91a9; color: #70020F; }
-        .card { border: none; border-radius: 1rem; box-shadow: 0 1px 8px rgba(112,2,15,.08); background: white; }
-        .card-header { background: white; border-bottom: 1.5px solid #ffdcd2; font-weight: 700; color: #70020F; border-radius: 1rem 1rem 0 0 !important; }
-        .page-link { color: #70020F; border-color: #ffdcd2; }
-        .page-link:hover { background: #FFDEE2; color: #70020F; border-color: #FFDEE2; }
-        .page-item.active .page-link { background: #70020F; border-color: #70020F; }
-        h1,h2,h3,h4,h5,h6 { color: #70020F; }
-        a { color: #70020F; }
-        a:hover { color: #FFA6B9; }
-        hr { border-color: #ffdcd2; }
+        .btn-primary { background: var(--primary); border-color: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--sidebar-bg); border-color: var(--sidebar-bg); color: white; }
+        .btn-outline-primary { border-color: var(--primary); color: var(--primary); }
+        .btn-outline-primary:hover { background: var(--primary); color: white; }
+        .btn-outline-secondary { border-color: var(--accent-blue); color: var(--sidebar-bg); }
+        .btn-outline-secondary:hover { background: var(--accent-blue); border-color: var(--accent-blue); color: var(--sidebar-bg); }
+        .btn-success { background: var(--accent-green); border-color: var(--accent-green); color: white; }
+        .btn-success:hover { background: #d04d64; border-color: #d04d64; color: white; }
+        .card { border: none; border-radius: 1rem; box-shadow: 0 1px 8px rgba(140,36,56,.08); background: white; }
+        .card-header { background: white; border-bottom: 1.5px solid var(--accent-blue); font-weight: 700; color: var(--sidebar-bg); border-radius: 1rem 1rem 0 0 !important; }
+        .page-link { color: var(--sidebar-bg); border-color: var(--accent-blue); }
+        .page-link:hover { background: var(--accent-blue); color: var(--sidebar-bg); border-color: var(--accent-blue); }
+        .page-item.active .page-link { background: var(--primary); border-color: var(--primary); color: white; }
+        h1,h2,h3,h4,h5,h6 { color: var(--sidebar-bg); }
+        a { color: var(--sidebar-bg); }
+        a:hover { color: var(--accent-green); }
+        hr { border-color: var(--accent-blue); }
         .text-muted { color: #8e6c70 !important; }
     </style>
     @stack('styles')
@@ -102,7 +103,7 @@
 {{-- Sidebar --}}
 <div class="sidebar">
     <div class="sidebar-brand">
-        <span>👗</span> Preloved<span style="color:#FFA6B9">.</span>id
+        <span>👗</span> Preloved<span style="color:var(--accent-green)">.</span>id
     </div>
 
     {{-- Info Toko --}}
@@ -113,7 +114,7 @@
                 <img src="{{ Storage::url(auth()->user()->shop->logo) }}"
                     style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0">
             @else
-                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FFDEE2,#70020F);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.9rem;flex-shrink:0">
+                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent-blue),var(--sidebar-bg));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:.9rem;flex-shrink:0">
                     {{ strtoupper(substr(auth()->user()->shop->name,0,1)) }}
                 </div>
             @endif
@@ -167,10 +168,10 @@
 
             @if(auth()->user()->shop && auth()->user()->shop->logo)
                 <img src="{{ Storage::url(auth()->user()->shop->logo) }}"
-                    style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0; border: 1.5px solid #FFDEE2;">
+                    style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0; border: 1.5px solid var(--accent-blue);">
             @else
                 <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold text-white"
-                    style="width:36px;height:36px;background:linear-gradient(135deg,#70020F,#FFDEE2);font-size:.85rem;flex-shrink:0;">
+                    style="width:36px;height:36px;background:linear-gradient(135deg,var(--sidebar-bg),var(--accent-blue));font-size:.85rem;flex-shrink:0;">
                     {{ strtoupper(substr(auth()->user()->name,0,1)) }}
                 </div>
             @endif

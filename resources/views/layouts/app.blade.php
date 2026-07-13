@@ -8,12 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         :root {
-            --dark-blue:   #70020F;
-            --light-blue:  #FFDEE2;
-            --light-green: #FFA6B9;
-            --base-white:  #FFF5F6;
+            --dark-blue:   #8C2438; /* Primary Dark */
+            --light-blue:  #FCE8EA; /* Soft Pink / Bg Soft */
+            --light-green: #E85D75; /* Accent */
+            --base-white:  #FFFFFF; /* White main background */
+            --primary:      #B8324A; /* Solid Primary */
         }
-        body { background: var(--base-white); font-family: 'Segoe UI', sans-serif; color: #3d0c11; }
+        body { background: var(--base-white); font-family: 'Segoe UI', sans-serif; color: #2D2D2D; }
 
         /* Navbar */
         .navbar-main {
@@ -24,7 +25,7 @@
             left: 0;
             right: 0;
             z-index: 1030;
-            box-shadow: 0 2px 12px rgba(112,2,15,.2);
+            box-shadow: 0 2px 12px rgba(140,36,56,.2);
         }
         .navbar-brand-text { font-weight: 800; font-size: 1.3rem; color: white; text-decoration: none; }
         .navbar-brand-text span { color: var(--light-blue); }
@@ -57,14 +58,14 @@
 
         /* Cards */
         .product-card {
-            border: 1px solid #ffdcd2; border-radius: .85rem;
+            border: 1px solid var(--light-blue); border-radius: .85rem;
             overflow: hidden; transition: .2s; background: white;
             height: 100%;
         }
-        .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(112,2,15,.12); border-color: var(--light-green); }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(140,36,56,.12); border-color: var(--light-green); }
         .product-card img { width: 100%; height: 220px; object-fit: cover; }
         .product-card .card-body { padding: .85rem; }
-        .product-price { color: var(--dark-blue); font-weight: 700; font-size: 1rem; }
+        .product-price { color: var(--primary); font-weight: 700; font-size: 1rem; }
         .product-badge {
             font-size: .68rem; padding: .2em .55em; border-radius: 2rem;
             background: var(--light-blue); color: var(--dark-blue); font-weight: 600;
@@ -77,7 +78,7 @@
 
         /* Category pills */
         .cat-pill {
-            border: 1.5px solid #ffdcd2; border-radius: 2rem;
+            border: 1.5px solid var(--light-blue); border-radius: 2rem;
             padding: .4rem 1rem; font-size: .82rem; font-weight: 600;
             color: var(--dark-blue); background: white; cursor: pointer;
             text-decoration: none; transition: .2s; white-space: nowrap;
@@ -94,12 +95,12 @@
         .footer-bottom { border-top: 1px solid rgba(255,255,255,.1); margin-top: 1.5rem; padding-top: 1rem; font-size: .78rem; color: rgba(255,255,255,.4); }
 
         /* Misc */
-        .btn-main { background: var(--dark-blue); color: white; border: none; border-radius: .6rem; font-weight: 600; }
-        .btn-main:hover { background: #54010B; color: white; }
-        .btn-outline-main { border: 1.5px solid var(--dark-blue); color: var(--dark-blue); border-radius: .6rem; font-weight: 600; background: transparent; }
-        .btn-outline-main:hover { background: var(--dark-blue); color: white; }
-        .form-control:focus, .form-select:focus { border-color: var(--light-green); box-shadow: 0 0 0 3px rgba(112,2,15,.12); }
-        .card { border: 1px solid #ffdcd2; border-radius: .85rem; }
+        .btn-main { background: var(--primary); color: white; border: none; border-radius: .6rem; font-weight: 600; }
+        .btn-main:hover { background: var(--dark-blue); color: white; }
+        .btn-outline-main { border: 1.5px solid var(--primary); color: var(--dark-blue); border-radius: .6rem; font-weight: 600; background: transparent; }
+        .btn-outline-main:hover { background: var(--primary); color: white; }
+        .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(184,50,74,.15); }
+        .card { border: 1px solid var(--light-blue); border-radius: .85rem; }
 
         /* Mascot animations */
         .animate-float {
@@ -168,22 +169,30 @@
     </div>
 </nav>
 
-{{-- Flash Messages --}}
+{{-- Flash Messages (Floating Toast) --}}
 @if(session('success') || session('error'))
-<div class="container mt-3">
+<div id="flash-toast" class="position-fixed" style="top:20px;right:20px;z-index:9999;min-width:280px;max-width:360px">
     @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show border-0 rounded-3">
-            <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="d-flex align-items-center gap-2 bg-white border-start border-success border-4 rounded-3 shadow-lg p-3 mb-2">
+            <i class="bi bi-check-circle-fill text-success"></i>
+            <span class="text-dark fw-semibold flex-grow-1" style="font-size:.82rem">{{ session('success') }}</span>
+            <button onclick="this.closest('.d-flex').remove()" class="btn-close btn-close-sm ms-auto" style="width:.8em;height:.8em"></button>
         </div>
     @endif
     @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show border-0 rounded-3">
-            <i class="bi bi-x-circle me-2"></i>{{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <div class="d-flex align-items-center gap-2 bg-white border-start border-danger border-4 rounded-3 shadow-lg p-3 mb-2">
+            <i class="bi bi-exclamation-circle-fill text-danger"></i>
+            <span class="text-dark fw-semibold flex-grow-1" style="font-size:.82rem">{{ session('error') }}</span>
+            <button onclick="this.closest('.d-flex').remove()" class="btn-close btn-close-sm ms-auto" style="width:.8em;height:.8em"></button>
         </div>
     @endif
 </div>
+<script>
+    setTimeout(() => {
+        const t = document.getElementById('flash-toast');
+        if (t) { t.style.transition = 'opacity .5s'; t.style.opacity = '0'; setTimeout(() => t.remove(), 500); }
+    }, 4500);
+</script>
 @endif
 
 {{-- Content --}}

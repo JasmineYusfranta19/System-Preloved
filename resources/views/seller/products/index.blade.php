@@ -8,7 +8,7 @@
     <div>
         <p class="text-muted mb-0" style="font-size:.88rem">Kelola semua produk yang kamu jual.</p>
     </div>
-    <a href="{{ route('seller.products.create') }}" class="btn text-white" style="background:linear-gradient(135deg,#70020F,#FFA6B9 )">
+    <a href="{{ route('seller.products.create') }}" class="btn text-white" style="background:linear-gradient(135deg,var(--sidebar-bg),var(--accent-green))">
         <i class="bi bi-plus-lg me-1"></i> Tambah Produk
     </a>
 </div>
@@ -29,7 +29,7 @@
                 </select>
             </div>
             <div class="col-md-3 d-flex gap-2">
-                <button type="submit" class="btn btn-primary flex-grow-1" style="background:#70020F;border-color:#70020F">Filter</button>
+                <button type="submit" class="btn btn-primary flex-grow-1" style="background:var(--primary);border-color:var(--primary)">Filter</button>
                 <a href="{{ route('seller.products.index') }}" class="btn btn-outline-secondary">Reset</a>
             </div>
         </form>
@@ -44,7 +44,7 @@
                 <div style="font-size:3.5rem">📦</div>
                 <h6 class="mt-3">Belum ada produk</h6>
                 <p style="font-size:.85rem">Mulai jual pakaian preloved kamu sekarang!</p>
-                <a href="{{ route('seller.products.create') }}" class="btn text-white" style="background:linear-gradient(135deg,#70020F,#FFA6B9)">
+                <a href="{{ route('seller.products.create') }}" class="btn text-white" style="background:linear-gradient(135deg,var(--sidebar-bg),var(--accent-green))">
                     + Tambah Produk Pertama
                 </a>
             </div>
@@ -80,7 +80,7 @@
                             </div>
                         </td>
                         <td style="font-size:.85rem">{{ $product->category->name ?? '-' }}</td>
-                        <td class="fw-600" style="color:#70020F;font-size:.88rem">{{ $product->formatted_price }}</td>
+                        <td class="fw-600" style="color:var(--sidebar-bg);font-size:.88rem">{{ $product->formatted_price }}</td>
                         <td>
                             <span class="fw-600" style="font-size:.88rem;color:{{ $product->stock > 0 ? '#10b981' : '#ef4444' }}">
                                 {{ $product->stock }}

@@ -1,12 +1,12 @@
 @extends('layouts.seller')
 @section('title', 'Dashboard')
-@section('page-title', '📊 Dashboard')
+@section('page-title', 'Dashboard Seller')
 
 @section('content')
 
 {{-- Greeting --}}
 <div class="mb-4">
-    <h5 class="fw-700 mb-1" style="font-weight:700;color:#70020F">
+    <h5 class="fw-700 mb-1" style="font-weight:700;color:#8C2438">
         Halo, {{ auth()->user()->name }}! 👋
     </h5>
     <p class="text-muted mb-0" style="font-size:.88rem">Berikut ringkasan toko kamu hari ini.</p>
@@ -16,12 +16,12 @@
 <div class="row g-3 mb-4">
     @php
     $cards = [
-        ['label'=>'Total Produk',    'value'=>$stats['total_products'],  'icon'=>'box-seam',    'bg'=>'linear-gradient(135deg,#70020F,#a82231)', 'emoji'=>'📦'],
-        ['label'=>'Produk Aktif',    'value'=>$stats['active_products'], 'icon'=>'check-circle','bg'=>'linear-gradient(135deg,#FFDEE2,#FFA6B9)', 'emoji'=>'✅', 'text_dark'=>true],
-        ['label'=>'Total Pesanan',   'value'=>$stats['total_orders'],    'icon'=>'bag-check',   'bg'=>'linear-gradient(135deg,#70020F,#FFDEE2)', 'emoji'=>'🛍️'],
-        ['label'=>'Perlu Diproses',  'value'=>$stats['pending_orders'],  'icon'=>'clock',       'bg'=>'linear-gradient(135deg,#FFDEE2,#70020F)', 'emoji'=>'⏳'],
-        ['label'=>'Total Ulasan',    'value'=>$stats['total_reviews'],   'icon'=>'star',        'bg'=>'linear-gradient(135deg,#FFA6B9,#FFDEE2)',  'emoji'=>'⭐', 'text_dark'=>true],
-        ['label'=>'Total Pendapatan','value'=>'Rp '.number_format($stats['total_revenue'],0,',','.'), 'icon'=>'cash-stack','bg'=>'linear-gradient(135deg,#70020F,#54010B)', 'emoji'=>'💰'],
+        ['label'=>'Total Produk',    'value'=>$stats['total_products'],  'icon'=>'box-seam',    'bg'=>'linear-gradient(135deg,#8C2438,#B8324A)', 'emoji'=>'📦'],
+        ['label'=>'Produk Aktif',    'value'=>$stats['active_products'], 'icon'=>'check-circle','bg'=>'linear-gradient(135deg,#FCE8EA,#E85D75)', 'emoji'=>'✅', 'text_dark'=>true],
+        ['label'=>'Total Pesanan',   'value'=>$stats['total_orders'],    'icon'=>'bag-check',   'bg'=>'linear-gradient(135deg,#8C2438,#FCE8EA)', 'emoji'=>'🛍️'],
+        ['label'=>'Perlu Diproses',  'value'=>$stats['pending_orders'],  'icon'=>'clock',       'bg'=>'linear-gradient(135deg,#FCE8EA,#8C2438)', 'emoji'=>'⏳'],
+        ['label'=>'Total Ulasan',    'value'=>$stats['total_reviews'],   'icon'=>'star',        'bg'=>'linear-gradient(135deg,#E85D75,#FCE8EA)',  'emoji'=>'⭐', 'text_dark'=>true],
+        ['label'=>'Total Pendapatan','value'=>'Rp '.number_format($stats['total_revenue'],0,',','.'), 'icon'=>'cash-stack','bg'=>'linear-gradient(135deg,#B8324A,#8C2438)', 'emoji'=>'💰'],
     ];
     @endphp
 
@@ -50,33 +50,33 @@
         <div class="card h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="fw-700 mb-0" style="font-weight:700;color:#70020F">🛍️ Pesanan Terbaru</h6>
+                    <h6 class="fw-700 mb-0" style="font-weight:700;color:#8C2438">🛍️ Pesanan Terbaru</h6>
                     <a href="{{ route('seller.orders.index') }}" class="btn btn-sm"
-                        style="background:#FFF5F6;color:#70020F;font-weight:600;font-size:.78rem">Lihat Semua</a>
+                        style="background:#FFF8F9;color:#8C2438;font-weight:600;font-size:.78rem">Lihat Semua</a>
                 </div>
 
                 @forelse($recentOrders as $order)
                 <div class="d-flex align-items-center gap-3 py-2 border-bottom">
                     <div class="rounded-circle d-flex align-items-center justify-content-center text-white fw-700"
-                        style="width:40px;height:40px;min-width:40px;background:linear-gradient(135deg,#70020F,#FFDEE2);font-size:.85rem">
+                        style="width:40px;height:40px;min-width:40px;background:linear-gradient(135deg,#8C2438,#FCE8EA);font-size:.85rem">
                         {{ strtoupper(substr($order->buyer->name,0,1)) }}
                     </div>
                     <div class="flex-grow-1">
-                        <div class="fw-600" style="font-size:.88rem;color:#70020F">{{ $order->buyer->name }}</div>
+                        <div class="fw-600" style="font-size:.88rem;color:#8C2438">{{ $order->buyer->name }}</div>
                         <div class="text-muted" style="font-size:.75rem">{{ $order->order_number }} · {{ $order->items->count() }} item</div>
                     </div>
                     <div class="text-end">
-                        <div class="fw-700" style="font-size:.88rem;color:#70020F">{{ $order->formatted_total }}</div>
+                        <div class="fw-700" style="font-size:.88rem;color:#8C2438">{{ $order->formatted_total }}</div>
                         @php
                         $badgeStyle = [
-                            'pending'    => 'background:#FFA6B9;color:#70020F',
-                            'paid'       => 'background:#FFDEE2;color:#70020F',
-                            'processing' => 'background:#70020F;color:white',
-                            'shipped'    => 'background:#b0414e;color:white',
-                            'completed'  => 'background:#70020F;color:#FFDEE2',
+                            'pending'    => 'background:#E85D75;color:white',
+                            'paid'       => 'background:#FCE8EA;color:#8C2438',
+                            'processing' => 'background:#8C2438;color:white',
+                            'shipped'    => 'background:#B8324A;color:white',
+                            'completed'  => 'background:#8C2438;color:#FCE8EA',
                             'cancelled'  => 'background:#fde8e8;color:#9b1c1c',
                         ];
-                        $style = $badgeStyle[$order->status] ?? 'background:#FFDEE2;color:#70020F';
+                        $style = $badgeStyle[$order->status] ?? 'background:#FCE8EA;color:#8C2438';
                         @endphp
                         <span class="badge badge-status" style="{{ $style }}">{{ $order->status }}</span>
                     </div>
@@ -96,9 +96,9 @@
         <div class="card h-100">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="fw-700 mb-0" style="font-weight:700;color:#70020F">🔥 Produk Terlaris</h6>
+                    <h6 class="fw-700 mb-0" style="font-weight:700;color:#8C2438">🔥 Produk Terlaris</h6>
                     <a href="{{ route('seller.products.index') }}" class="btn btn-sm"
-                        style="background:#FFF5F6;color:#70020F;font-weight:600;font-size:.78rem">Kelola</a>
+                        style="background:#FFF8F9;color:#8C2438;font-weight:600;font-size:.78rem">Kelola</a>
                 </div>
 
                 @forelse($topProducts as $i => $product)
@@ -107,10 +107,10 @@
                         {{ $i===0?'🥇':($i===1?'🥈':($i===2?'🥉':'#'.($i+1))) }}
                     </div>
                     <div class="flex-grow-1">
-                        <div class="fw-600" style="font-size:.85rem;color:#70020F">{{ Str::limit($product->name,30) }}</div>
+                        <div class="fw-600" style="font-size:.85rem;color:#8C2438">{{ Str::limit($product->name,30) }}</div>
                         <div class="text-muted" style="font-size:.75rem">{{ $product->order_items_count }} terjual</div>
                     </div>
-                    <div class="fw-700" style="font-size:.82rem;color:#70020F">{{ $product->formatted_price }}</div>
+                    <div class="fw-700" style="font-size:.82rem;color:#8C2438">{{ $product->formatted_price }}</div>
                 </div>
                 @empty
                 <div class="text-center py-4 text-muted">
