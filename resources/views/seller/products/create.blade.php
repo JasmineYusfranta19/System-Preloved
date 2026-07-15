@@ -170,7 +170,7 @@
                 {{-- Submit --}}
                 <div class="col-12 d-flex gap-3 justify-content-end">
                     <a href="{{ route('seller.products.index') }}" class="btn btn-outline-secondary px-4">Batal</a>
-                    <button type="submit" class="btn text-white px-5" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)">
+                    <button type="submit" class="btn text-white px-5" style="background:#B8324A">
                         <i class="bi bi-check-lg me-1"></i> Simpan Produk
                     </button>
                 </div>

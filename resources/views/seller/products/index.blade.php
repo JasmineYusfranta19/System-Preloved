@@ -8,7 +8,7 @@
     <div>
         <p class="text-muted mb-0" style="font-size:.88rem">Kelola semua produk yang kamu jual.</p>
     </div>
-    <a href="{{ route('seller.products.create') }}" class="btn text-white" style="background:linear-gradient(135deg,var(--sidebar-bg),var(--accent-green))">
+    <a href="{{ route('seller.products.create') }}" class="btn text-white" style="background:#8C2438">
         <i class="bi bi-plus-lg me-1"></i> Tambah Produk
     </a>
 </div>

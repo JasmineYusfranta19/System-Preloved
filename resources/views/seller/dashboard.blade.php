@@ -16,12 +16,12 @@
 <div class="row g-3 mb-4">
     @php
     $cards = [
-        ['label'=>'Total Produk',    'value'=>$stats['total_products'],  'icon'=>'box-seam',    'bg'=>'linear-gradient(135deg,#8C2438,#B8324A)', 'emoji'=>'📦'],
-        ['label'=>'Produk Aktif',    'value'=>$stats['active_products'], 'icon'=>'check-circle','bg'=>'linear-gradient(135deg,#FCE8EA,#E85D75)', 'emoji'=>'✅', 'text_dark'=>true],
-        ['label'=>'Total Pesanan',   'value'=>$stats['total_orders'],    'icon'=>'bag-check',   'bg'=>'linear-gradient(135deg,#8C2438,#FCE8EA)', 'emoji'=>'🛍️'],
-        ['label'=>'Perlu Diproses',  'value'=>$stats['pending_orders'],  'icon'=>'clock',       'bg'=>'linear-gradient(135deg,#FCE8EA,#8C2438)', 'emoji'=>'⏳'],
-        ['label'=>'Total Ulasan',    'value'=>$stats['total_reviews'],   'icon'=>'star',        'bg'=>'linear-gradient(135deg,#E85D75,#FCE8EA)',  'emoji'=>'⭐', 'text_dark'=>true],
-        ['label'=>'Total Pendapatan','value'=>'Rp '.number_format($stats['total_revenue'],0,',','.'), 'icon'=>'cash-stack','bg'=>'linear-gradient(135deg,#B8324A,#8C2438)', 'emoji'=>'💰'],
+        ['label'=>'Total Produk',    'value'=>$stats['total_products'],  'icon'=>'box-seam',    'bg'=>'#8C2438', 'emoji'=>'📦'],
+        ['label'=>'Produk Aktif',    'value'=>$stats['active_products'], 'icon'=>'check-circle','bg'=>'#8C2438', 'emoji'=>'✅'],
+        ['label'=>'Total Pesanan',   'value'=>$stats['total_orders'],    'icon'=>'bag-check',   'bg'=>'#8C2438', 'emoji'=>'🛍️'],
+        ['label'=>'Perlu Diproses',  'value'=>$stats['pending_orders'],  'icon'=>'clock',       'bg'=>'#8C2438', 'emoji'=>'⏳'],
+        ['label'=>'Total Ulasan',    'value'=>$stats['total_reviews'],   'icon'=>'star',        'bg'=>'#8C2438', 'emoji'=>'⭐'],
+        ['label'=>'Total Pendapatan','value'=>'Rp '.number_format($stats['total_revenue'],0,',','.'), 'icon'=>'cash-stack','bg'=>'#8C2438', 'emoji'=>'💰'],
     ];
     @endphp
 
