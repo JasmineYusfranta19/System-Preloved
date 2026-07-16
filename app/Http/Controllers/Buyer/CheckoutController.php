@@ -12,6 +12,8 @@ use App\Models\OrderItem;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Address;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class CheckoutController extends Controller
 {
@@ -103,16 +105,59 @@ class CheckoutController extends Controller
     {
         if ($order->buyer_id !== Auth::id()) abort(403);
 
+        // Set konfigurasi Midtrans
+        Config::$serverKey = config('services.midtrans.server_key');
+        Config::$isProduction = config('services.midtrans.is_production', false);
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+
+        // Buat array payload untuk Midtrans
+        $params = [
+            'transaction_details' => [
+                'order_id' => $order->order_number, // Pastikan ID ini unik
+                'gross_amount' => $order->total,
+            ],
+            'customer_details' => [
+                'first_name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            ]
+        ];
+
+        $snapToken = Snap::getSnapToken($params);
+
         $order->load(['items.product.primaryImage', 'payment', 'address']);
 
-        return view('buyer.payment', compact('order'));
+        return view('buyer.payment', compact('order', 'snapToken'));
     }
 
     // Halaman sukses
     public function success(Order $order)
     {
         if ($order->buyer_id !== Auth::id()) abort(403);
-        return view('buyer.order-success', compact('order'));
+
+        // Cek status langsung ke Midtrans jika status database masih pending
+        if ($order->status === 'pending') {
+            Config::$serverKey = config('services.midtrans.server_key');
+            Config::$isProduction = config('services.midtrans.is_production', false);
+            try {
+                $status = \Midtrans\Transaction::status($order->order_number);
+                if (in_array($status->transaction_status, ['settlement', 'capture'])) {
+                    DB::transaction(function () use ($order, $status) {
+                        $order->update(['status' => 'processing']);
+                        if ($order->payment) {
+                            $order->payment->update([
+                                'status' => 'paid',
+                                'payment_method' => $status->payment_type
+                            ]);
+                        }
+                    });
+                }
+            } catch (\Exception $e) {
+                // Abaikan jika error / order belum dibayar di Midtrans
+            }
+        }
+
+        return view('buyer.order_success', compact('order'));
     }
 
     // Riwayat pesanan buyer

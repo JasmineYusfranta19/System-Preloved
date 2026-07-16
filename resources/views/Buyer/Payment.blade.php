@@ -59,4 +59,30 @@
         </p>
     </div>
 </div>
+
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.client_key') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const payButton = document.getElementById('pay-button');
+        if (payButton) {
+            payButton.onclick = function () {
+                // Panggil fungsi snap.pay() dengan token yang dikirim dari controller
+                snap.pay('{{ $snapToken }}', {
+                    onSuccess: function(result){
+                        window.location.href = "{{ route('orders.success', $order->id) }}";
+                    },
+                    onPending: function(result){
+                        alert("Menunggu pembayaran Anda!");
+                    },
+                    onError: function(result){
+                        alert("Pembayaran gagal!");
+                    },
+                    onClose: function(){
+                        alert("Anda menutup popup sebelum menyelesaikan pembayaran");
+                    }
+                });
+            };
+        }
+    });
+</script>
 @endsection

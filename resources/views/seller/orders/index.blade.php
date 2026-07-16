@@ -49,7 +49,15 @@
                 <tbody>
                     @foreach($orders as $order)
                     @php
-                    $statusColors = ['pending'=>'warning','paid'=>'info','processing'=>'primary','shipped'=>'secondary','completed'=>'success','cancelled'=>'danger','refunded'=>'dark'];
+                    $badgeStyle = [
+                        'pending'    => 'background:#ff9800;color:white',
+                        'paid'       => 'background:#2196f3;color:white',
+                        'processing' => 'background:#4caf50;color:white',
+                        'shipped'    => 'background:#9c27b0;color:white',
+                        'completed'  => 'background:#009688;color:white',
+                        'cancelled'  => 'background:#f44336;color:white',
+                        'refunded'   => 'background:#343a40;color:white',
+                    ];
                     $statusLabels = ['pending'=>'Menunggu','paid'=>'Dibayar','processing'=>'Diproses','shipped'=>'Dikirim','completed'=>'Selesai','cancelled'=>'Batal'];
                     @endphp
                     <tr>
@@ -80,7 +88,7 @@
                             @endif
                         </td>
                         <td>
-                            <span class="badge bg-{{ $statusColors[$order->status]??'secondary' }} badge-status">
+                            <span class="badge badge-status" style="{{ $badgeStyle[$order->status]??'background:#6c757d;color:white' }}">
                                 {{ $statusLabels[$order->status]??$order->status }}
                             </span>
                         </td>

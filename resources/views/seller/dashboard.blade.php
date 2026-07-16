@@ -69,14 +69,15 @@
                         <div class="fw-700" style="font-size:.88rem;color:#8C2438">{{ $order->formatted_total }}</div>
                         @php
                         $badgeStyle = [
-                            'pending'    => 'background:#E85D75;color:white',
-                            'paid'       => 'background:#FCE8EA;color:#8C2438',
-                            'processing' => 'background:#8C2438;color:white',
-                            'shipped'    => 'background:#B8324A;color:white',
-                            'completed'  => 'background:#8C2438;color:#FCE8EA',
-                            'cancelled'  => 'background:#fde8e8;color:#9b1c1c',
+                            'pending'    => 'background:#ff9800;color:white',
+                            'paid'       => 'background:#2196f3;color:white',
+                            'processing' => 'background:#4caf50;color:white',
+                            'shipped'    => 'background:#9c27b0;color:white',
+                            'completed'  => 'background:#009688;color:white',
+                            'cancelled'  => 'background:#f44336;color:white',
+                            'refunded'   => 'background:#343a40;color:white',
                         ];
-                        $style = $badgeStyle[$order->status] ?? 'background:#FCE8EA;color:#8C2438';
+                        $style = $badgeStyle[$order->status] ?? 'background:#6c757d;color:white';
                         @endphp
                         <span class="badge badge-status" style="{{ $style }}">{{ $order->status }}</span>
                     </div>

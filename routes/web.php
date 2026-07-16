@@ -14,6 +14,7 @@ use App\Http\Controllers\Seller\DashboardController as SellerDashboard;
 use App\Http\Controllers\Seller\ShopController as SellerShop;
 use App\Http\Controllers\Seller\ProductController as SellerProduct;
 use App\Http\Controllers\Seller\OrderController as SellerOrder;
+use App\Http\Controllers\PaymentCallbackController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/test', [TesterController::class, 'index']);
@@ -23,6 +24,7 @@ Route::get('/products/{slug}', [ProductController::class, 'show'])->name('produc
 Route::get('/shops/{slug}', [ShopController::class, 'show'])->name('shops.show');
 
 // ── Admin Routes ─────────────────────────────────────────────
+Route::post('/midtrans/callback', [PaymentCallbackController::class, 'callback'])->name('midtrans.callback');
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/register', [AuthController::class, 'showRegister'])->name('register'); // admin.register

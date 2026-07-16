@@ -15,10 +15,18 @@
                         <p class="text-muted mb-0" style="font-size:.82rem">{{ $order->created_at->format('d F Y, H:i') }} WIB</p>
                     </div>
                     @php
-                    $statusColors = ['pending'=>'warning','paid'=>'info','shipped'=>'secondary','completed'=>'success','cancelled'=>'danger'];
-                    $statusLabels = ['pending'=>'Menunggu Pembayaran','paid'=>'Sudah Dibayar','shipped'=>'Dalam Pengiriman','completed'=>'Selesai','cancelled'=>'Dibatalkan'];
+                    $badgeStyle = [
+                        'pending'    => 'background:#ff9800;color:white',
+                        'paid'       => 'background:#2196f3;color:white',
+                        'processing' => 'background:#4caf50;color:white',
+                        'shipped'    => 'background:#9c27b0;color:white',
+                        'completed'  => 'background:#009688;color:white',
+                        'cancelled'  => 'background:#f44336;color:white',
+                        'refunded'   => 'background:#343a40;color:white',
+                    ];
+                    $statusLabels = ['pending'=>'Menunggu Pembayaran','paid'=>'Sudah Dibayar','processing'=>'Diproses','shipped'=>'Dalam Pengiriman','completed'=>'Selesai','cancelled'=>'Dibatalkan'];
                     @endphp
-                    <span class="badge bg-{{ $statusColors[$order->status]??'secondary' }} px-3 py-2" style="font-size:.82rem">
+                    <span class="badge px-3 py-2" style="{{ $badgeStyle[$order->status]??'background:#6c757d;color:white' }};font-size:.82rem">
                         {{ $statusLabels[$order->status]??$order->status }}
                     </span>
                 </div>
